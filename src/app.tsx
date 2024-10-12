@@ -25,7 +25,7 @@ const Title = ({ status }: { status: Status }) => {
     case 'lose':
       return <h2>お前あの祠を壊したんか！？</h2>
     case 'win':
-      return <h2>探索完了！</h2>
+      return <h2>探索成功！</h2>
     case 'gaming':
       return <h2>探索中...</h2>
     case 'start':
@@ -38,9 +38,9 @@ const Title = ({ status }: { status: Status }) => {
 const displayTool = (tool: 'flag' | 'open') => {
   switch (tool) {
     case 'flag':
-      return 'タップした場所を探索します'
-    case 'open':
       return 'タップした場所を祠があるとマークします'
+    case 'open':
+      return 'タップした場所を探索します'
     default:
       throw new Error('tool:', tool satisfies never)
   }
