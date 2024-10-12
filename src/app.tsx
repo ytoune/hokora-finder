@@ -25,13 +25,24 @@ const Title = ({ status }: { status: Status }) => {
     case 'lose':
       return <h2>お前あの祠を壊したんか！？</h2>
     case 'win':
-      return <h2>探索完了</h2>
+      return <h2>探索完了！</h2>
     case 'gaming':
       return <h2>探索中...</h2>
     case 'start':
       return <h2>山探索ゲーム</h2>
     default:
       throw new Error('status:', status satisfies never)
+  }
+}
+
+const displayTool = (tool: 'flag' | 'open') => {
+  switch (tool) {
+    case 'flag':
+      return 'タップした場所を探索します'
+    case 'open':
+      return 'タップした場所を祠があるとマークします'
+    default:
+      throw new Error('tool:', tool satisfies never)
   }
 }
 
@@ -74,7 +85,7 @@ export const App = () => {
                 ? '💥'
                 : tile.nearMines || ''
               : tile.hasFlag
-                ? '🚩'
+                ? '祠'
                 : '🌲'}
           </button>
         ))}
@@ -89,7 +100,7 @@ export const App = () => {
           }}
           disabled={tool === 'open'}
         >
-          💥
+          探索
         </button>
         <button
           type="button"
@@ -100,9 +111,9 @@ export const App = () => {
           }}
           disabled={tool === 'flag'}
         >
-          🚩
+          マーク
         </button>
-        current: {tool}
+        {displayTool(tool)}
       </div>
       <hr />
       <div>
@@ -139,7 +150,7 @@ export const App = () => {
           />
         </label>
         <label style={styles.label}>
-          hokoras:{' '}
+          hokora:{' '}
           <input
             type="number"
             name="mines"
