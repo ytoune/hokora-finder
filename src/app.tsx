@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'preact/hooks'
 import { initTiles } from './mine'
 import type { Status } from './mine'
+import type { JSXInternal } from 'preact/src/jsx'
 
 const styles = {
   wrapper: {
@@ -18,7 +19,7 @@ const styles = {
     backgroundColor: 'white',
     border: 'none',
   },
-} as const
+} as const satisfies { [x: string]: JSXInternal.DOMCSSProperties }
 
 const Title = ({ status }: { status: Status }) => {
   switch (status) {
@@ -31,7 +32,7 @@ const Title = ({ status }: { status: Status }) => {
     case 'start':
       return <h2>山探索ゲーム</h2>
     default:
-      throw new Error('status:', status satisfies never)
+      throw new Error(`status: ${status satisfies never}`)
   }
 }
 
@@ -42,7 +43,7 @@ const displayTool = (tool: 'flag' | 'open') => {
     case 'open':
       return 'タップした場所を探索します'
     default:
-      throw new Error('tool:', tool satisfies never)
+      throw new Error(`tool: ${tool satisfies never}`)
   }
 }
 
